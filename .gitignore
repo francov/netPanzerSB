@@ -1,0 +1,21 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files - android project subfolder
+platforms/android/bin/
+platforms/gen/
+platforms/android/assets/
+
+# generated files
+bin/
+gen/
+
+*.log
+*~
