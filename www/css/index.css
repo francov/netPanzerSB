@@ -41,7 +41,6 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
 }
 
@@ -112,4 +111,60 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+@media all and (max-width: 30em) {
+    .sb_page .ui-content {
+        padding: 2px;
+    }
+
+    .sb_page .ui-listview .ui-li-heading {
+        font-size: 12px;
+    }
+
+    .sb_page .ui-listview .ui-li-desc {
+        font-size: 10px;
+    }
+
+    .sb_page div[data-role=header] h1 {
+        font-size: 14px;
+    }
+    .gridbreakpoint .ui-block-a,
+    .gridbreakpoint .ui-block-b,
+    .gridbreakpoint .ui-block-c {
+        display: inline-block;
+        /*width: 100%;*/
+    }
+}
+
+.sb_page .listitem,
+div[id*=serverDetails] .ui-title {
+    display: inline-block !important;
+}
+
+.ui-body-c .ui-link,
+.ui-body-c .ui-link:visited {
+    color: red !important;
+}
+
+.gridbreakpoint .ui-block-a {
+    min-width: 110px;
+}
+.gridbreakpoint .ui-block-b {
+    min-width: 80px;
+}
+.gridbreakpoint .ui-block-c {
+    min-width: 120px;
+}
+.gridbreakpoint .ui-block-a img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.table-stroke thead th {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.table-stroke tbody th,
+.table-stroke tbody td {
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
 }

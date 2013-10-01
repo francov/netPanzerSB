@@ -12,6 +12,7 @@
 platforms/android/bin/
 platforms/gen/
 platforms/android/assets/
+platforms/android/res/xml/config.xml
 
 # generated files
 bin/

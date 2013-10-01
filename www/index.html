@@ -23,20 +23,170 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+        <title>NetPanzer</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div id="home" data-role="page" class="sb_page">
+            <div data-role="header" data-position="fixed">
+                <h1>NetPanzer</h1>
             </div>
+            <div data-role="content">
+                <ul id="serverList" data-role="listview" data-filter="false" data-inset="true" data-count-theme="c">
+                </ul>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#home" data-icon="grid" data-transition="none">Server Browser</a></li>
+                        <li><a href="#shoutbox" data-icon="star" data-transition="none">Shout Box</a></li>
+                        <li><a href="#info" data-icon="info" data-transition="none">Info</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
         </div>
-        <script type="text/javascript" src="phonegap.js"></script>
+
+        <!-- Second page -->
+        <div id="shoutbox" data-role="page" class="sb_page">
+            <div data-role="header" data-position="fixed">
+                <h1>Shout Box</h1>
+            </div>
+            <div data-role="content">
+                <p>SHOUT BOX HERE</p>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#home" data-icon="grid" data-transition="none">Server Browser</a></li>
+                        <li><a href="#shoutbox" data-icon="star" data-transition="none">Shout Box</a></li>
+                        <li><a href="#info" data-icon="info" data-transition="none">Info</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+        </div>
+
+        <!-- Third page -->
+        <div id="info" data-role="page" class="sb_page">
+            <div data-role="header" data-position="fixed">
+                <h1>Info</h1>
+            </div>
+            <div data-role="content">
+                <h2>About NetPanzer</h2>
+                <p><strong>netPanzer</strong> is an isometric view real-time tactical game designed for play across the Internet and over LAN systems. One on one games are possible via direct connect or modem. netPanzer is designed for FAST ACTION combat -- it is not another resource management clone. In fact, there aren't any resources at all. Each player will have many units of different types at their disposal.</p>
+                <p>Players can fight until their units are destroyed -- then respawn and keep on going. The game is real-time, but it's based on quick tactical action and unit management. Battles progress quickly and constantly; in fact, they never let up. There is no stop in the action because there is no waiting for resources to be collected and converted into weaponry. Players can join or leave multiplayer games at any time.</p>
+                <div data-role="collapsible" data-collapsed="true" data-theme="c">
+                    <h3>Links</h3>
+                    <p>Here Links, social pages, etc..</p>
+                </div>
+                <div data-role="collapsible" data-collapsed="true" data-theme="c">
+                    <h3>Credits</h3>
+                    <p>Here credits</p>
+                </div>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#home" data-icon="grid" data-transition="none">Server Browser</a></li>
+                        <li><a href="#shoutbox" data-icon="star" data-transition="none">Shout Box</a></li>
+                        <li><a href="#info" data-icon="info" data-transition="none">Info</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+        </div>
+        <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.loadTemplate-1.2.3.min.js"></script>
+
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
     </body>
+
+    <!-- Templates -->
+    <script type="text/html" id="gameserver">
+        <img data-src="mapnameseo" data-alt="mapname"/>
+        <div>
+            <p><strong>Server:</strong>  <img data-src="hostcountrycode"/> <span data-content="hostcountryname"></span></p>
+            <h3 data-content="hostname"></h3>
+            <p data-content="mapname"></p>
+            <p>IP/Port: <span data-content="host"></span>:<span data-content="port"></span></p>
+            <span class="ui-li-count" data-content="numplayers"></span>
+        </div>
+    </script>
+
+    <script type="text/html" id="playerRow-tpl">
+        <tr>
+            <th>
+            <a href="#" data-rel="external" class="ui-link" data-content="playername"></a></th>
+            <td data-content="kills"></td>
+            <td data-content="deaths"></td>
+            <td data-content="score"></td>
+            <td data-content="killerRate"></td>
+            <td data-content="efficiency"></td>
+        </tr>
+    </script>
+
+    <script type="text/html" id="gameserverDetails-tpl">
+        <div data-template-bind='[{"attribute": "id", "value": "pageid"}]' data-role="page" class="sb_page">
+            <div data-role="header" data-position="fixed">
+                <a href="#home" data-role="button" data-theme="a" data-icon="back" data-transition="none">Back</a>
+                <h1 data-content="hostname"></h1>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-solo">
+                    <p><strong>Server:</strong>  <img data-src="hostcountrycode"/> <span data-content="hostcountryname"></span><br/>
+                        <strong>Game version: </strong><span data-content="gameversion"></span><br/>
+                        <strong>Map: </strong><span data-content="mapname"></span>
+                    </p>
+                </div>
+                <div class="ui-grid-b gridbreakpoint">
+                    <div class="ui-block-a">
+                        <img data-src="mapnameseo" data-alt="mapname"/>
+                    </div>
+                    <div class="ui-block-b">
+                        <p><strong>Players:</strong><br/>
+                            <span data-content="numplayers"></span> Players active<br/>
+                            <span data-content="maxplayers"></span> is Maximum
+                        </p>
+                        <p><strong>Bases: </strong><span data-content="outposts"></span></p>
+                        <p><strong>Map cycle:</strong><br/>
+                            <span data-content="mapcycle"></span>
+                        </p>
+                    </div>
+                    <div class="ui-block-c">
+                        <p><strong>Max. units:</strong><br/>
+                            <span data-content="units_per_player"></span> per Player<br/>
+                            <span data-content="maxunits"></span> units max. in game
+                        </p>
+                        <p><strong>Type:</strong><br/>
+                            <span data-content="gamestyle"></span>,<br/>
+                            <span data-content="gamestyleText"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <table data-template-bind='[{"attribute": "id", "value": "tableid"}]' data-role="table" class="ui-responsive table-stroke">
+                    <thead>
+                        <tr>
+                            <th><abbr title="Player name">Player</abbr></th>
+                            <th>kills</th>
+                            <th>Losses</th>
+                            <th>Bases</th>
+                            <th>Killer Rate</th>
+                            <th>Effic. Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+            </div><!-- /footer -->
+        </div>
+    </script>
 </html>
