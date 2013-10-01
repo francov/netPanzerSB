@@ -49,7 +49,7 @@ $.when(jqmReady).then(function() {
     loadInfo();
     setInterval(function() {
         if (!$.mobile.activePage.is("#shoutbox") && !($.mobile.activePage.is("#info"))) {
-            $.mobile.changePage('#home',function(){
+            $.mobile.changePage('#home', {transition: "slideup"}, function(){
                 $("#serverList").empty();
                 loadInfo();
             });
