@@ -138,7 +138,22 @@ function loadInfo() {
                $("#tableDetails"+i).hide();
             }
 
+            // Trigger 'create' for jqm to initialize widgets for this page
             $("#serverDetails"+i).trigger("create");
+
+            // Need to manually apply css to header and footer,
+            // because they do not respond to page "create" event
+            $("#serverDetails"+i).find('div[data-role="header"], div[data-role="footer"]').each(
+                function( ){
+                    var dR = $(this).attr('data-role');
+                    var dT = $(this).attr('data-theme');
+                    $(this).addClass('ui-' + dR + ' ui-bar-' + dT).attr('role', (dR == 'header' ? 'banner' : 'contentinfo') ).children('h1, h2, h3, h4').each(
+                        function( ){
+                            $(this).addClass('ui-title').attr({'role':'heading', 'aria-level':'1'});
+                        }
+                    ).children('a').addClass('ui-btn-left');
+                }
+            );
         });
         $('#serverList').listview('refresh');
     }).fail(function() {

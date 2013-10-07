@@ -137,11 +137,6 @@ h1 {
     }
 }
 
-.sb_page .listitem,
-div[id*=serverDetails] .ui-title {
-    display: inline-block !important;
-}
-
 .ui-body-c .ui-link,
 .ui-body-c .ui-link:visited {
     color: red !important;
