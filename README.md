@@ -39,7 +39,37 @@ $> phonegap run android
 
 ## Debug
 
-[Debugging in PhoneGap](https://github.com/phonegap/phonegap/wiki/Debugging-in-PhoneGap) recomended.
+[Debugging in PhoneGap](https://github.com/phonegap/phonegap/wiki/Debugging-in-PhoneGap) is recomended to read.
+
+For the case we will describe the debug process through the [PhoneGap Emulator](http://emulate.phonegap.com/)
+
+The PhoneGap Emulator requires two free, third-party tools.
+
+1. Google Chrome Browser.
+2. [Ripple Emulation Environment](https://chrome.google.com/webstore/detail/geelfhphabnejjhdalkjhgipohgpdnoc).
+
+Once the extension is installed on Google Chrome, go to Settings > Extensions and enable the `Allow access to file URLs` checkbox for the Ripple Emulator extension. 
+
+Then you need to open google chrome browser from command-line with the following profile:
+
+```
+$> google-chrome --disable-web-security --allow-file-access-from-files
+```
+
+The `--disable-web-security` parameter will allow chrome to do CORS, while the `--allow-file-access-from-files` parameter allow access files on filesystem via the `file://` protocol. So DO NOT navigate over the internet with this chrome profile, as it is very insecure!
+
+To debug the application you need to build the project first, by using
+
+```
+$> phonegap build android
+```
+
+Now you can put in the address bar `file:///<path_to_netPanzerSB>/platforms/android/assets/www/index.html`, enable Ripple from the upper-right corner and hit Enter. You may notice some javascript alert messages: you have to ignore them by press 'Cancel' on each of them. (This is because PhoneGap generate platform specific `phonegap.js` file, so as we have built for android but we are using a desktop browser, this results into an incorrect platform file).
+
+Once the ripple emulator has been loaded, you have to fire the `deviceready` event from the web interface.
+
+That's all! You can now inspect using DevTools.
+
 
 ## Collaborate!
 
