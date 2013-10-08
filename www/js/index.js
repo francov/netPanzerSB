@@ -151,7 +151,10 @@ function loadInfo() {
                         function( ){
                             $(this).addClass('ui-title').attr({'role':'heading', 'aria-level':'1'});
                         }
-                    ).children('a').addClass('ui-btn-left');
+                    )
+                    if (dR == 'header') {
+                       $(this).children('a').addClass('ui-btn-left');
+                    }
                 }
             );
         });
