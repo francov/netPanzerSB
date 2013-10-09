@@ -40,7 +40,11 @@ $(document).on("pageinit", function(event, ui) {
  * General initialization.
  */
 $.when(jqmReady, pgReady).then(function() {
-// $.when(jqmReady).then(function() {
+    //Initialization code here
+    if(app.callback) {
+        app.callback();
+    }
+
     $(document).bind("backbutton", function(){
         if (!$.mobile.activePage.is("#home")) {
             $.mobile.changePage('#home', {transition: 'none'});
@@ -56,12 +60,11 @@ $.when(jqmReady, pgReady).then(function() {
             );
         }
     });
-    //Initialization code here
-    if(app.callback) {
-        app.callback();
-    }
+
+    $.mobile.defaultPageTransition = 'none';
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
+
     loadInfo();
     setInterval(function() {
         if (!$.mobile.activePage.is("#shoutbox") && !($.mobile.activePage.is("#info"))) {
@@ -132,7 +135,7 @@ function loadInfo() {
                         deaths: p.deaths,
                         score: p.score,
                         killerRate: (typeof p.additional != "undefined") ? p.additional.killerRate : "-",
-                        efficiency: (typeof p.additional != "undefined") ? p.additional.efficiency : "-"
+                        efficiency: (typeof p.additional != "undefined") ? (p.additional.efficiency+"%") : "-"
                     }, {"append": true, "overwriteCache": true});
                 });
             } else {

@@ -114,7 +114,7 @@ h1 {
 }
 
 @media all and (max-width: 30em) {
-    .sb_page .ui-content {
+    #home .ui-content {
         padding: 2px;
     }
 
@@ -135,6 +135,29 @@ h1 {
         display: inline-block;
         /*width: 100%;*/
     }
+}
+
+@media ( min-width: 30em ) {
+  .table-stroke td,
+  .table-stroke th,
+  .table-stroke tbody th,
+  .table-stroke tbody td,
+  .table-stroke thead td,
+  .table-stroke thead th {
+    display: table-cell;
+    float: none !important;
+    margin: 0;
+  }
+
+  .table-stroke th,
+  .table-stroke td {
+    vertical-align: bottom !important;
+  }
+
+  .table-stroke td .ui-table-cell-label,
+  .table-stroke th .ui-table-cell-label {
+    display: none;
+  }
 }
 
 .ui-body-c .ui-link,

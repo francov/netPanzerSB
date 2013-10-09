@@ -22,14 +22,14 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
 
         <title>NetPanzer</title>
     </head>
     <body>
         <div id="home" data-role="page" class="sb_page">
-            <div data-role="header" data-position="fixed">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>NetPanzer</h1>
             </div>
             <div data-role="content">
@@ -50,7 +50,7 @@
 
         <!-- Second page -->
         <div id="shoutbox" data-role="page" class="sb_page">
-            <div data-role="header" data-position="fixed">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Shout Box</h1>
             </div>
             <div data-role="content">
@@ -70,7 +70,7 @@
 
         <!-- Third page -->
         <div id="info" data-role="page" class="sb_page">
-            <div data-role="header" data-position="fixed">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Info</h1>
             </div>
             <div data-role="content">
@@ -133,7 +133,7 @@
     </script>
 
     <script type="text/html" id="gameserverDetails-tpl">
-            <div data-role="header" data-theme="a">
+            <div data-role="header" data-theme="a" data-tap-toggle="false">
                 <a href="#home" data-role="button" data-theme="a" data-icon="back" data-transition="none">Back</a>
                 <h1 data-content="hostname"></h1>
             </div>
