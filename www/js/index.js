@@ -116,6 +116,7 @@ function loadInfo() {
                 gameversion: gameserver.gameversion,
                 host: gameserver.host,
                 port: gameserver.port,
+                uptime: gameserver.uptime,
                 hostname: document.createTextNode(gameserver.hostname),
                 hostcountryname: gameserver.hostcountryname,
                 hostcountrycode: "img/country/"+ gameserver.hostcountrycode.toLowerCase() +".gif"
