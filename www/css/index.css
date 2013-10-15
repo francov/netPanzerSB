@@ -135,6 +135,12 @@ h1 {
         display: inline-block;
         /*width: 100%;*/
     }
+    .gridbreakpoint .ui-block-b {
+        min-width: 120px !important;
+    }
+    .gridbreakpoint .ui-block-c {
+        min-width: 150px !important;
+    }
 }
 
 @media ( min-width: 30em ) {
