@@ -15,25 +15,29 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
- */
+*/
 
-package it.alcacoop.netpanzersb;
+package org.apache.cordova.splashscreen;
 
-import org.apache.cordova.Config;
-import org.apache.cordova.DroidGap;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.json.JSONArray;
 
-import android.os.Bundle;
+public class SplashScreen extends CordovaPlugin {
 
-public class NetPanzerSB extends DroidGap
-{
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+        if (action.equals("hide")) {
+            this.webView.postMessage("splashscreen", "hide");
+        } else if (action.equals("show")){
+            this.webView.postMessage("splashscreen", "show");
+        }
+        else {
+            return false;
+        }
 
-    super.setIntegerProperty("splashscreen", R.drawable.splash);
-    super.loadUrl(Config.getStartUrl(), 8000);
+        callbackContext.success();
+        return true;
+    }
 
-    // super.loadUrl("file:///android_asset/www/index.html")
-  }
 }
-

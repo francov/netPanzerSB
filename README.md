@@ -82,3 +82,8 @@ That's all! You can now inspect using DevTools.
 4. Push to the branch (`git push origin my_new_feature`)
 
 5. Create new Pull Request
+
+
+## License
+
+NetPanzerSB is released under a GPLv3 license, please look at LICENSE file.
