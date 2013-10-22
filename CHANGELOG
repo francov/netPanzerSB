@@ -1,0 +1,9 @@
+2013-10-22 NetPanzerSB - 1.0
+
+    First release:
+    - online server browser, related details page and about page
+    - removed tap-to-toggle from toolbars
+    - splashscreen on start up
+    - better table presentation for low resolution devices.
+    - some missing maps
+    - custom jqm UI theme
