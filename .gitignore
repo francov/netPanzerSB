@@ -19,3 +19,7 @@ gen/
 
 *.log
 *~
+
+node_modules/
+www/
+
