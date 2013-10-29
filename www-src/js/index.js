@@ -22,7 +22,15 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
             }
         });
 
+        $( document ).bind( "pagebeforechange", function( event, data ){
+          if (data.toPage[0].id == "ranking") {
+            // console.log(data.toPage[0].id);
+            // loadRanking();
+          }
+        });
+
         loadInfo();
+        loadRanking();
         setInterval(function() {
             if (!$.mobile.activePage.is("#shoutbox") && !($.mobile.activePage.is("#info"))) {
                 $("#serverList").empty();
@@ -31,6 +39,22 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
         }, 30000);
     });
     if (document.URL.match(/^http?:/)) $(document).trigger("deviceready");
+
+    function loadRanking() {
+      $.ajax({
+        url: "http://test.netpanzer.info/public/jsonRanking.php",
+        type: "GET",
+        crossDomain: true,
+        headers: {"Authorization": "Basic dGVzdDpjbTBuMSNzSw=="},
+        success: function( data ) {
+          console.log($.parseJSON(data));
+          $("#rankingDiv").append(data);
+        },
+        error: function() {
+          console.log("FAIL!");
+        }
+      });
+    }
 
     function loadInfo() {
         $.getJSON("http://www.netpanzer.info/public/serverbrowser.json.php", function(data) {
