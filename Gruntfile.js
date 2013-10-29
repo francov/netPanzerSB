@@ -11,13 +11,13 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, cwd: 'src/', src: ['**'], dest: 'www/'}
+          {expand: true, cwd: 'www-src/', src: ['**'], dest: 'www/'}
         ]
       }
     },
 
     watch: {
-      files: ['src/**/*'],
+      files: ['www-src/**/*'],
       tasks: ['default'],
     },
 
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         options: {
           hostname: "*",
           port: 8000,
-          base: 'src'
+          base: 'www-src'
         }
       },
       prod: {
@@ -41,8 +41,8 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          appDir: 'src',
-          mainConfigFile: 'src/js/main.js',
+          appDir: 'www-src',
+          mainConfigFile: 'www-src/js/main.js',
           dir: 'www',
           modules: [
             {

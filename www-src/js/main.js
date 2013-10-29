@@ -9,5 +9,3 @@ require.config({
         "jquery.loadTemplate-1.2.4": ["jquery"]
     }
 });
-
-// requirejs(["../index"]);
