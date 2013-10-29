@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('serve:dev', ['connect:dev', 'watch']);
+  grunt.registerTask('serve:dev', ['connect:dev:keepalive']);
   grunt.registerTask('serve:prod', ['clean', 'requirejs', 'connect:prod:keepalive']);
   grunt.registerTask('build', ['clean', 'requirejs']);
   grunt.registerTask('default', ['build']);

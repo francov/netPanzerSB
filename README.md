@@ -12,7 +12,7 @@ This is an Android application developed with [PhoneGap](http://phonegap.com) an
 
 ## Project Layout
 
-The layout follows the guideline of phonegap, so the main part of the application you can find in `www` root folder.
+The layout follows the guideline of phonegap, except the `www-src` directory, which is used for development. In this dir you can find the main part of the application.
 
 ## Build and installation
 
@@ -30,10 +30,12 @@ $> sudo npm install -g phonegap
 
 The installation log may produce errors for any uninstalled platform SDKs.
 
-To test the App on an Emulator or Device (in the last case ensure you have Degub USB enabled)
+To deploy the App on an Emulator or Device (in the last case ensure you have Degub USB enabled) follow these steps:
 
 ```
 $> cd netPanzerSB
+$> npm install
+$> grunt
 $> phonegap run android
 ```
 
@@ -48,27 +50,25 @@ The PhoneGap Emulator requires two free, third-party tools.
 1. Google Chrome Browser.
 2. [Ripple Emulation Environment](https://chrome.google.com/webstore/detail/geelfhphabnejjhdalkjhgipohgpdnoc).
 
-Once the extension is installed on Google Chrome, go to Settings > Extensions and enable the `Allow access to file URLs` checkbox for the Ripple Emulator extension. 
+Once the extension is installed on Google Chrome, enable Ripple from the upper-right corner.
 
-Then you need to open google chrome browser from command-line with the following profile:
-
-```
-$> google-chrome --disable-web-security --allow-file-access-from-files
-```
-
-The `--disable-web-security` parameter will allow chrome to do CORS, while the `--allow-file-access-from-files` parameter allow access files on filesystem via the `file://` protocol. So DO NOT navigate over the internet with this chrome profile, as it is very insecure!
-
-To debug the application you need to build the project first, by using
+There's a grunt task which spawn a static webserver into the `www-src` dir of the project, so you can run:
 
 ```
-$> phonegap build android
+$> grunt serve:dev
 ```
 
-Now you can put in the address bar `file:///<path_to_netPanzerSB>/platforms/android/assets/www/index.html`, enable Ripple from the upper-right corner and hit Enter. You may notice some javascript alert messages: you have to ignore them by press 'Cancel' on each of them. (This is because PhoneGap generate platform specific `phonegap.js` file, so as we have built for android but we are using a desktop browser, this results into an incorrect platform file).
+By this way you can enter in the address bar of the browser `localhost:8000` to see the running app. At this point you can hack on the source code too, or inspect using DevTools.
 
-Once the ripple emulator has been loaded, you have to fire the `deviceready` event from the web interface.
+Other grunt tasks:
 
-That's all! You can now inspect using DevTools.
+```
+$> grunt serve:dev   # serve through a static webserver from `www-src` dir.
+$> grunt serve:prod   # optimize assets (css/js minification) and serve through a static webserver from `www` dir.
+$> grunt build   # default task, optimize assets (css/js minification) and copy output into `www` dir
+```
+
+That's all!
 
 
 ## Collaborate!
