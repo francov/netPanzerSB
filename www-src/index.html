@@ -60,7 +60,20 @@
                 <h1>Ranking</h1>
             </div>
             <div data-role="content">
-                <div id="rankingDiv"></div>
+                <table id="tableRanking" data-role="table" class="table-stroke">
+                    <thead>
+                        <tr>
+                            <th><abbr title="Player name">Player</abbr></th>
+                            <th>kills</th>
+                            <th>Losses</th>
+                            <th>Killer Rate</th>
+                            <th>Effic. Rate</th>
+                            <th>Champion Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
 
             <div data-role="footer" data-position="fixed">
@@ -106,6 +119,7 @@
                 <div data-role="navbar" data-iconpos="top">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Server Browser</a></li>
+                        <li><a href="#ranking" data-icon="star" data-transition="none">Ranking</a></li>
                         <li><a href="#info" data-icon="info" data-transition="none">About</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -113,6 +127,20 @@
         </div>
 
     </body>
+
+    <script type="text/html" id="playerRankRow-tpl">
+        <tr>
+            <th>
+                <a href="#" data-rel="external" class="ui-link" data-content="playername"></a>
+                <span data-content="medals"></span>
+            </th>
+            <td data-content="allkills"></td>
+            <td data-content="alllosses"></td>
+            <td data-content="killerrate"></td>
+            <td data-content="efficiency"></td>
+            <td data-content="championsrate"></td>
+        </tr>
+    </script>
 
     <!-- Templates -->
     <script type="text/html" id="gameserver">

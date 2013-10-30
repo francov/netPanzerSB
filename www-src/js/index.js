@@ -48,7 +48,33 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
         headers: {"Authorization": "Basic dGVzdDpjbTBuMSNzSw=="},
         success: function( data ) {
           console.log($.parseJSON(data));
-          $("#rankingDiv").append(data);
+          var parsed = $.parseJSON(data);
+          var i, player;
+          $.each(parsed, function (i, p) {
+            $("#tableRanking > tbody").loadTemplate($("#playerRankRow-tpl"), {
+                playername: document.createTextNode(p.player),
+                medals: function() {
+                  var m = ""
+                  if (p.medals) {
+                    if ((p.medals.gold > 0) && (p.medals.gold != 1))
+                      m+="<img src='img/medals/gold.png'></img><sup>" + p.medals.gold + "</sup>";
+                    else m+="<img src='img/medals/gold.png'></img>";
+                    if ((p.medals.silver > 0) && (p.medals.silver != 1))
+                      m+="<img src='img/medals/silver.png'></img><sup>" + p.medals.silver + "</sup>";
+                    else m+="<img src='img/medals/silver.png'></img>";
+                    if ((p.medals.bronze > 0) && (p.medals.bronze != 1))
+                      m+="<img src='img/medals/bronze.png'></img><sup>" + p.medals.bronze + "</sup>";
+                    else m+="<img src='img/medals/bronze.png'></img>"
+                  }
+                  return m;
+                },
+                allkills: p.allkills,
+                alllosses: p.alllosses,
+                killerrate: p.killerrate,
+                efficiency: p.efficiency,
+                championsrate: p.championsrate
+            }, {"append": true, "overwriteCache": true});
+          });
         },
         error: function() {
           console.log("FAIL!");
