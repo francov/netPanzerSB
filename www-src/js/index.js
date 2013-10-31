@@ -1,46 +1,5 @@
 define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], function($) {
 
-    $(document).on("deviceready", function(event, ui) {
-    // $(function() {
-        $.mobile.defaultPageTransition = 'none';
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
-
-        $(document).bind("backbutton", function(){
-            if (!$.mobile.activePage.is("#home")) {
-                $.mobile.changePage('#home', {transition: 'none'});
-            } else {
-                navigator.notification.confirm('Really quit NetPanzerSB?',
-                    function(button) {
-                        if (button == 2) {
-                            navigator.app.exitApp();
-                        }
-                    },
-                    'Quit',
-                    'Cancel,Exit'
-                );
-            }
-        });
-
-        $( document ).bind( "pagebeforechange", function( event, data ) {
-          if (data.toPage[0].id == "home") $('#serverList').listview('refresh');
-          if (data.toPage[0].id == "ranking") {
-            // console.log(data.toPage[0].id);
-            // loadRanking();
-          }
-        });
-
-        loadInfo();
-        loadRanking();
-        setInterval(function() {
-            if (!$.mobile.activePage.is("#shoutbox") && !($.mobile.activePage.is("#info"))) {
-                $("#serverList").empty();
-                loadInfo();
-            }
-        }, 30000);
-    });
-    if (document.URL.match(/^http?:/)) $(document).trigger("deviceready");
-
     function getStrikedDays(date) {
       var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
       var i = 1;
@@ -201,4 +160,44 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
             );
         });
     }
+
+    $(document).on("deviceready", function(event, ui) {
+        $.mobile.defaultPageTransition = 'none';
+        $.support.cors = true;
+        $.mobile.allowCrossDomainPages = true;
+
+        $(document).bind("backbutton", function(){
+            if (!$.mobile.activePage.is("#home")) {
+                $.mobile.changePage('#home', {transition: 'none'});
+            } else {
+                navigator.notification.confirm('Really quit NetPanzerSB?',
+                    function(button) {
+                        if (button == 2) {
+                            navigator.app.exitApp();
+                        }
+                    },
+                    'Quit',
+                    'Cancel,Exit'
+                );
+            }
+        });
+
+        $( document ).bind( "pagebeforechange", function( event, data ) {
+          if (data.toPage[0].id == "home") $('#serverList').listview('refresh');
+          if (data.toPage[0].id == "ranking") {
+            // console.log(data.toPage[0].id);
+            // loadRanking();
+          }
+        });
+
+        loadInfo();
+        loadRanking();
+        setInterval(function() {
+            if (!$.mobile.activePage.is("#ranking") && !($.mobile.activePage.is("#info"))) {
+                $("#serverList").empty();
+                loadInfo();
+            }
+        }, 30000);
+    });
+    if (document.URL.match(/^http?:/)) $(document).trigger("deviceready");
 });
