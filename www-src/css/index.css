@@ -101,13 +101,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
@@ -195,4 +195,24 @@ h1 {
 .table-stroke tbody th,
 .table-stroke tbody td {
   border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+.strength {
+  background-color: rgb(51, 116, 252);
+  border: 1px solid rgb(30, 46, 34);
+  height: 8px;
+  float: left;
+  margin: 3px 5px 0px 0px;
+  padding: 0px;
+  border-radius: 3px;
+}
+
+.rate {
+  background-color: rgb(255, 77, 77);
+  border: 1px solid rgb(30, 46, 34);
+  height: 8px;
+  float: left;
+  margin: 3px 5px 0px 0px;
+  padding: 0px;
+  border-radius: 3px;
 }

@@ -22,7 +22,8 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
             }
         });
 
-        $( document ).bind( "pagebeforechange", function( event, data ){
+        $( document ).bind( "pagebeforechange", function( event, data ) {
+          if (data.toPage[0].id == "home") $('#serverList').listview('refresh');
           if (data.toPage[0].id == "ranking") {
             // console.log(data.toPage[0].id);
             // loadRanking();
@@ -40,39 +41,62 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
     });
     if (document.URL.match(/^http?:/)) $(document).trigger("deviceready");
 
+    function getStrikedDays(date) {
+      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      var i = 1;
+      var days="";
+      for(i = 1; i <= lastDay.getDate(); i++) {
+        if (i < date.getDate()) {
+          days += "<strike>" + i + ".</strike>  "
+        } else if (i == date.getDate()) {
+          days += "<b>" + i + ".  </b>"
+        } else {
+          days += i+".  "
+        }
+      }
+      return days;
+    }
+
+    function getMedalsFor(player) {
+      var m = ""
+      if (player.medals) {
+        if ((player.medals.gold > 0) && (player.medals.gold != 1))
+          m+="<img src='img/medals/gold.png'></img><sup>" + player.medals.gold + "</sup>";
+        else m+="<img src='img/medals/gold.png'></img>";
+        if ((player.medals.silver > 0) && (player.medals.silver != 1))
+          m+="<img src='img/medals/silver.png'></img><sup>" + player.medals.silver + "</sup>";
+        else m+="<img src='img/medals/silver.png'></img>";
+        if ((player.medals.bronze > 0) && (player.medals.bronze != 1))
+          m+="<img src='img/medals/bronze.png'></img><sup>" + player.medals.bronze + "</sup>";
+        else m+="<img src='img/medals/bronze.png'></img>"
+      }
+      return m;
+    }
+
     function loadRanking() {
+      var date = new Date();
+      var months =['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      $("#month").append(months[date.getMonth()] + " " + date.getFullYear());
+      $("#days").html(getStrikedDays(date));
       $.ajax({
         url: "http://test.netpanzer.info/public/jsonRanking.php",
         type: "GET",
         crossDomain: true,
         headers: {"Authorization": "Basic dGVzdDpjbTBuMSNzSw=="},
         success: function( data ) {
-          console.log($.parseJSON(data));
           var parsed = $.parseJSON(data);
           var i, player;
           $.each(parsed, function (i, p) {
             $("#tableRanking > tbody").loadTemplate($("#playerRankRow-tpl"), {
                 playername: document.createTextNode(p.player),
-                medals: function() {
-                  var m = ""
-                  if (p.medals) {
-                    if ((p.medals.gold > 0) && (p.medals.gold != 1))
-                      m+="<img src='img/medals/gold.png'></img><sup>" + p.medals.gold + "</sup>";
-                    else m+="<img src='img/medals/gold.png'></img>";
-                    if ((p.medals.silver > 0) && (p.medals.silver != 1))
-                      m+="<img src='img/medals/silver.png'></img><sup>" + p.medals.silver + "</sup>";
-                    else m+="<img src='img/medals/silver.png'></img>";
-                    if ((p.medals.bronze > 0) && (p.medals.bronze != 1))
-                      m+="<img src='img/medals/bronze.png'></img><sup>" + p.medals.bronze + "</sup>";
-                    else m+="<img src='img/medals/bronze.png'></img>"
-                  }
-                  return m;
-                },
-                allkills: p.allkills,
-                alllosses: p.alllosses,
+                medals: getMedalsFor(p),
+                activityrate: '<small>' + p.acitivityrate + '</small><span class="rate" style="width:' + (p.acitivityrate * 10) +'px"></span>',
+                expertrate: '<small>' + p.expertrate + '</small><span class="rate" style="width:' + (p.expertrate * 10) +'px"></span>',
+                efficiency: p.efficiency + "%",
                 killerrate: p.killerrate,
-                efficiency: p.efficiency,
-                championsrate: p.championsrate
+                pointsall: p.pointsall,
+                championsrate: p.championsrate,
+                strength: '<span class="strength" style="width:' + p.strength +'px"></span><small>' + p.strength + '%</small>'
             }, {"append": true, "overwriteCache": true});
           });
         },
@@ -165,7 +189,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
                     }
                 );
             });
-            $('#serverList').listview('refresh');
+            if ($.mobile.activePage.is("#home")) $('#serverList').listview('refresh');
         }).fail(function() {
             navigator.notification.alert('Check your internet connection!',
                 function(button) {
