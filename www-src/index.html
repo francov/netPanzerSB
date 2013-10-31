@@ -60,15 +60,20 @@
                 <h1>Ranking</h1>
             </div>
             <div data-role="content">
+                <h2 id="month">Monthly Championship: </h2>
+                <div id="days"></div>
+                <br/><br/>
                 <table id="tableRanking" data-role="table" class="table-stroke">
                     <thead>
                         <tr>
                             <th><abbr title="Player name">Player</abbr></th>
-                            <th>kills</th>
-                            <th>Losses</th>
+                            <th>Activity Rate</th>
+                            <th>Expert Rate</th>
+                            <th>Efficiency</th>
                             <th>Killer Rate</th>
-                            <th>Effic. Rate</th>
+                            <th>Points</th>
                             <th>Champion Rate</th>
+                            <th>Strength</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,12 +138,14 @@
             <th>
                 <a href="#" data-rel="external" class="ui-link" data-content="playername"></a>
                 <span data-content="medals"></span>
-            </th>
-            <td data-content="allkills"></td>
-            <td data-content="alllosses"></td>
-            <td data-content="killerrate"></td>
+            </th>num
+            <td data-content="activityrate"></td>
+            <td data-content="expertrate"></td>
             <td data-content="efficiency"></td>
+            <td data-content="killerrate"></td>
+            <td data-content="pointsall"></td>
             <td data-content="championsrate"></td>
+            <td data-content="strength"></td>
         </tr>
     </script>
 
