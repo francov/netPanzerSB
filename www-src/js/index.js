@@ -66,7 +66,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
     }
 
     function loadInfo() {
-        $.getJSON("http://www.netpanzer.info/public/serverbrowser.json.php", function(data) {
+        $.getJSON("http://www.netpanzer.info/Server-Browser/JsonData/?_=", function(data) {
             var i, gameserver;
             $.each(data, function (i, gameserver) {
                 if (typeof gameserver.error != "undefined") return;
