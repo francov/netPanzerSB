@@ -48,7 +48,7 @@
                 <div data-role="navbar" data-iconpos="top">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Server Browser</a></li>
-                        <li><a href="#ranking" data-icon="star" data-transition="none">Ranking</a></li>
+                        <li><a href="#ranking" data-icon="star" data-transition="none">Hall of Fame</a></li>
                         <li><a href="#info" data-icon="info" data-transition="none">About</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -85,7 +85,7 @@
                 <div data-role="navbar" data-iconpos="top">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Server Browser</a></li>
-                        <li><a href="#ranking" data-icon="star" data-transition="none">Ranking</a></li>
+                        <li><a href="#ranking" data-icon="star" data-transition="none">Hall of Fame</a></li>
                         <li><a href="#info" data-icon="info" data-transition="none">About</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -124,7 +124,7 @@
                 <div data-role="navbar" data-iconpos="top">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Server Browser</a></li>
-                        <li><a href="#ranking" data-icon="star" data-transition="none">Ranking</a></li>
+                        <li><a href="#ranking" data-icon="star" data-transition="none">Hall of Fame</a></li>
                         <li><a href="#info" data-icon="info" data-transition="none">About</a></li>
                     </ul>
                 </div><!-- /navbar -->
@@ -164,7 +164,9 @@
     <script type="text/html" id="playerRow-tpl">
         <tr>
             <th>
-            <a href="#" data-rel="external" class="ui-link" data-content="playername"></a></th>
+                <a href="#" data-rel="external" class="ui-link" data-content="playername"></a>
+                <span data-content="medals"></span>
+            </th>
             <td data-content="kills"></td>
             <td data-content="deaths"></td>
             <td data-content="score"></td>
@@ -213,7 +215,7 @@
                     </div>
                 </div>
 
-                <table data-template-bind='[{"attribute": "id", "value": "tableid"}]' data-role="table" class="ui-responsive table-stroke">
+                <table data-template-bind='[{"attribute": "id", "value": "tableid"}]' data-role="table" class="table-stroke">
                     <thead>
                         <tr>
                             <th><abbr title="Player name">Player</abbr></th>

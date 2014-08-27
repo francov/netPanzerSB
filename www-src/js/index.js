@@ -18,6 +18,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
 
     function getMedalsFor(player) {
       var m = ""
+      if(typeof(player) === 'undefined') return m;
       if (player.medals) {
         if ((player.medals.gold > 0) && (player.medals.gold != 1))
           m+="<img src='img/medals/gold.png'></img><sup>" + player.medals.gold + "</sup>";
@@ -117,6 +118,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
                     $.each(gameserver.players, function (j, p) {
                         $("#tableDetails"+i+" > tbody").loadTemplate($("#playerRow-tpl"), {
                             playername: document.createTextNode(p.player),
+                            medals: getMedalsFor(p.additional),
                             kills: p.kills,
                             deaths: p.deaths,
                             score: p.score,
