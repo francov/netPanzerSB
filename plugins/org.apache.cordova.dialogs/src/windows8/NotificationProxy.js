@@ -71,9 +71,11 @@ module.exports = {
         var _title = args[1];
         var _buttonLabels = args[2];
 
+        var result;
+
         var btnList = [];
         function commandHandler (command) {
-            win && win(btnList[command.label]);
+            result = btnList[command.label];
         }
 
         var md = new Windows.UI.Popups.MessageDialog(message, _title);
@@ -85,6 +87,7 @@ module.exports = {
         }
         md.showAsync().then(function() {
             isAlertShowing = false;
+            win && win(result);
             if (alertStack.length) {
                 setTimeout(alertStack.shift(), 0);
             }
@@ -93,25 +96,28 @@ module.exports = {
     },
 
     beep:function(winX, loseX, args) {
-        var count = args[0];
-        /*
-        var src = //filepath//
-        var playTime = 500; // ms
-        var quietTime = 1000; // ms
-        var media = new Media(src, function(){});
-        var hit = 1;
-        var intervalId = window.setInterval( function () {
-            media.play();
-            sleep(playTime);
-            media.stop();
-            media.seekTo(0);
-            if (hit < count) {
-                hit++;
+
+        // set a default args if it is not set
+        args = args && args.length ? args : ["1"];
+
+        var snd = new Audio('ms-winsoundevent:Notification.Default');
+        var count = parseInt(args[0]) || 1;
+        snd.msAudioCategory = "Alerts";
+
+        var onEvent = function () {
+            if (count > 0) {
+                snd.play();
             } else {
-                window.clearInterval(intervalId);
+                snd.removeEventListener("ended", onEvent);
+                snd = null;
+                winX && winX(); // notification.js just sends null, but this is future friendly
             }
-        }, playTime + quietTime); */
+            count--;
+        };
+        snd.addEventListener("ended", onEvent);
+        onEvent();
+
     }
 };
 
-require("cordova/windows8/commandProxy").add("Notification",module.exports);
+require("cordova/exec/proxy").add("Notification",module.exports);

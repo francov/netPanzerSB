@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="it.alcacoop.netpanzersb" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Hello Cordova</name>
-    <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
@@ -19,7 +17,6 @@
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
-    <preference name="useBrowserHistory" value="true" />
     <name>NetPanzerSB</name>
     <description>
         netPanzer game Server Browser.
