@@ -20,11 +20,11 @@
 package it.alcacoop.netpanzersb;
 
 import org.apache.cordova.Config;
-import org.apache.cordova.DroidGap;
+import org.apache.cordova.CordovaActivity;
 
 import android.os.Bundle;
 
-public class NetPanzerSB extends DroidGap
+public class NetPanzerSB extends CordovaActivity
 {
   @Override
   public void onCreate(Bundle savedInstanceState) {
