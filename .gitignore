@@ -12,6 +12,11 @@
 platforms/android/bin/
 platforms/gen/
 platforms/android/assets/
+platforms/android/ant-build/
+platforms/android/ant-gen/
+platforms/android/CordovaLib/ant-build/
+platforms/android/CordovaLib/ant-gen/
+platforms/gen/
 
 # generated files
 bin/
