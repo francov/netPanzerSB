@@ -1,24 +1,23 @@
 define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], function($) {
 
-    function getStrikedDays(date) {
-      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      var i = 1;
-      var days="";
-      for(i = 1; i <= lastDay.getDate(); i++) {
-        if (i < date.getDate()) {
-          days += "<strike>" + i + ".</strike>  "
-        } else if (i == date.getDate()) {
-          days += "<b>" + i + ".  </b>"
-        } else {
-          days += i+".  "
-        }
-      }
-      return days;
+    function getTop10MedalsFor(player) {
+      var m = ""
+      if(typeof(player) === 'undefined') return m;
+
+      if (!!player.gold)
+        m+="<img src='img/medals/gold.png'></img><sup>" + player.gold.length + "</sup>";
+      if (!!player.silver)
+        m+="<img src='img/medals/silver.png'></img><sup>" + player.silver.length + "</sup>";
+      if (!!player.bronze)
+        m+="<img src='img/medals/bronze.png'></img><sup>" + player.bronze.length + "</sup>";
+
+      return m;
     }
 
     function getMedalsFor(player) {
       var m = ""
-      if(typeof(player) === 'undefined') return m;
+      if (!player) return m;
+
       if (player.medals) {
         if ((player.medals.gold > 0) && (player.medals.gold != 1))
           m+="<img src='img/medals/gold.png'></img><sup>" + player.medals.gold + "</sup>";
@@ -33,35 +32,24 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
       return m;
     }
 
-    function loadRanking() {
-      var date = new Date();
-      var months =['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      $("#month").append(months[date.getMonth()] + " " + date.getFullYear());
-      $("#days").html(getStrikedDays(date));
+    function loadHallOfFame() {
       $.ajax({
-        url: "http://test.netpanzer.info/public/jsonRanking.php",
+        url: "http://www.netpanzer.info/hallOfFame.json",
         type: "GET",
         crossDomain: true,
-        headers: {"Authorization": "Basic dGVzdDpjbTBuMSNzSw=="},
         success: function( data ) {
-          var parsed = $.parseJSON(data);
-          var i, player;
-          $.each(parsed, function (i, p) {
-            $("#tableRanking > tbody").loadTemplate($("#playerRankRow-tpl"), {
-                playername: document.createTextNode(p.player),
-                medals: getMedalsFor(p),
-                activityrate: '<small>' + p.acitivityrate + '</small><span class="rate" style="width:' + (p.acitivityrate * 10) +'px"></span>',
-                expertrate: '<small>' + p.expertrate + '</small><span class="rate" style="width:' + (p.expertrate * 10) +'px"></span>',
-                efficiency: p.efficiency + "%",
-                killerrate: p.killerrate,
-                pointsall: p.pointsall,
-                championsrate: p.championsrate,
-                strength: '<span class="strength" style="width:' + p.strength +'px"></span><small>' + p.strength + '%</small>'
+          var top10 = data.alltime;
+          $.each(top10, function (i, p) {
+            $("#tableTop10 > tbody").loadTemplate($("#playerTop10Row-tpl"), {
+                rank: p.allTimePos + ".",
+                playername: i,
+                medals: getTop10MedalsFor(p),
+                score: p.allTimeValue
             }, {"append": true, "overwriteCache": true});
           });
         },
         error: function() {
-          console.log("FAIL!");
+          console.log("FAILED to load hall of fame!");
         }
       });
     }
@@ -167,6 +155,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
         $.mobile.defaultPageTransition = 'none';
         $.support.cors = true;
         $.mobile.allowCrossDomainPages = true;
+        var hallOfFameLoaded = false;
 
         $(document).bind("backbutton", function(){
             if (!$.mobile.activePage.is("#home")) {
@@ -186,16 +175,15 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
 
         $( document ).bind( "pagebeforechange", function( event, data ) {
           if (data.toPage[0].id == "home") $('#serverList').listview('refresh');
-          if (data.toPage[0].id == "ranking") {
-            // console.log(data.toPage[0].id);
-            // loadRanking();
+          if (data.toPage[0].id == "hallOfFame") {
+            if (!hallOfFameLoaded) loadHallOfFame();
           }
         });
 
         loadInfo();
-        loadRanking();
+        // loadHallOfFame();
         setInterval(function() {
-            if (!$.mobile.activePage.is("#ranking") && !($.mobile.activePage.is("#info"))) {
+            if (!$.mobile.activePage.is("#hallOfFame") && !($.mobile.activePage.is("#info"))) {
                 $("#serverList").empty();
                 loadInfo();
             }
