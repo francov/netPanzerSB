@@ -5,11 +5,11 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
       if(typeof(player) === 'undefined') return m;
 
       if (!!player.gold)
-        m+="<img src='img/medals/gold.png'></img><sup>" + player.gold.length + "</sup>";
+        m+="<img src='img/medals/gold.png'/><sup>" + player.gold.length + "</sup>";
       if (!!player.silver)
-        m+="<img src='img/medals/silver.png'></img><sup>" + player.silver.length + "</sup>";
+        m+="<img src='img/medals/silver.png'/><sup>" + player.silver.length + "</sup>";
       if (!!player.bronze)
-        m+="<img src='img/medals/bronze.png'></img><sup>" + player.bronze.length + "</sup>";
+        m+="<img src='img/medals/bronze.png'/><sup>" + player.bronze.length + "</sup>";
 
       return m;
     }
@@ -20,14 +20,14 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
 
       if (player.medals) {
         if ((player.medals.gold > 0) && (player.medals.gold != 1))
-          m+="<img src='img/medals/gold.png'></img><sup>" + player.medals.gold + "</sup>";
-        else m+="<img src='img/medals/gold.png'></img>";
+          m+="<img src='img/medals/gold.png'/><sup>" + player.medals.gold + "</sup>";
+        else m+="<img src='img/medals/gold.png'/>";
         if ((player.medals.silver > 0) && (player.medals.silver != 1))
-          m+="<img src='img/medals/silver.png'></img><sup>" + player.medals.silver + "</sup>";
-        else m+="<img src='img/medals/silver.png'></img>";
+          m+="<img src='img/medals/silver.png'/><sup>" + player.medals.silver + "</sup>";
+        else m+="<img src='img/medals/silver.png'/>";
         if ((player.medals.bronze > 0) && (player.medals.bronze != 1))
-          m+="<img src='img/medals/bronze.png'></img><sup>" + player.medals.bronze + "</sup>";
-        else m+="<img src='img/medals/bronze.png'></img>"
+          m+="<img src='img/medals/bronze.png'/><sup>" + player.medals.bronze + "</sup>";
+        else m+="<img src='img/medals/bronze.png'/>"
       }
       return m;
     }
@@ -38,15 +38,32 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
         type: "GET",
         crossDomain: true,
         success: function( data ) {
-          var top10 = data.alltime;
-          $.each(top10, function (i, p) {
+          // Top 10
+          $.each(data.alltime, function (i, p) {
             $("#tableTop10 > tbody").loadTemplate($("#playerTop10Row-tpl"), {
+              countryflag: (!!p.iso2) ? ("img/country/"+ p.iso2.toLowerCase() +".gif") : "",
                 rank: p.allTimePos + ".",
                 playername: i,
                 medals: getTop10MedalsFor(p),
                 score: p.allTimeValue
             }, {"append": true, "overwriteCache": true});
           });
+          $("#tableTop10").table("refresh");
+
+          // Monthly winners
+          var monthly = data.monthly;
+          for (var i=0; i < data.monthly.length; i+=3) {
+            $("#tableMonthlyWinners > tbody").loadTemplate($("#monthlyWinnerRow-tpl"), {
+                countryflag1: (!!monthly[i].iso2) ? ("img/country/"+ monthly[i].iso2.toLowerCase() +".gif") : "",
+                countryflag2: (!!monthly[i+1].iso2) ? ("img/country/"+ monthly[i+1].iso2.toLowerCase() +".gif") : "",
+                countryflag3: (!!monthly[i+2].iso2) ? ("img/country/"+ monthly[i+2].iso2.toLowerCase() +".gif") : "",
+                date: monthly[i].year + "-" + monthly[i].month,
+                goldWinner: monthly[i].player,
+                silverWinner: monthly[i+1].player,
+                bronzeWinner: monthly[i+2].player
+            }, {"append": true, "overwriteCache": true});
+          }
+          $("#tableMonthlyWinners").table("refresh");
         },
         error: function() {
           console.log("FAILED to load hall of fame!");

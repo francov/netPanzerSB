@@ -74,6 +74,21 @@
                     <tbody>
                     </tbody>
                 </table>
+                <br/><br/>
+                <h2>Monthly Chanpionship Winners</h2>
+                <br/>
+                <table id="tableMonthlyWinners" data-role="table" class="table-stroke-monthly">
+                    <thead>
+                        <tr>
+                            <th><abbr title="Date">Date</abbr></th>
+                            <th><img src="img/medals/gold.png"/> Gold medal winner</th>
+                            <th><img src="img/medals/silver.png"/> Silver medal winner</th>
+                            <th><img src="img/medals/bronze.png"/> Bronze medal winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
 
             <div data-role="footer" data-position="fixed">
@@ -128,20 +143,35 @@
 
     </body>
 
+    <!-- Templates -->
     <script type="text/html" id="playerTop10Row-tpl">
         <tr>
             <th>
                <a href="#" data-rel="external" data-content="rank"></a>
             </th>
             <td>
-                <a href="#" data-rel="external" class="ui-link" data-content="playername"></a>
+                <img data-src="countryflag"/> <a href="#" data-rel="external" class="ui-link" data-content="playername"></a>
             </td>
             <td data-content="medals"></td>
             <td data-content="score"></td>
         </tr>
     </script>
 
-    <!-- Templates -->
+    <script type="text/html" id="monthlyWinnerRow-tpl">
+        <tr>
+            <th><span data-content="date"></span></th>
+            <td>
+                <img data-src="countryflag1"/> <a href="#" data-rel="external" class="ui-link" data-content="goldWinner"></a>
+            </td>
+            <td>
+                <img data-src="countryflag2"/> <a href="#" data-rel="external" data-content="silverWinner"></a>
+            </td>
+            <td>
+                <img data-src="countryflag3"/> <a href="#" data-rel="external" data-content="bronzeWinner"></a>
+            </td>
+        </tr>
+    </script>
+
     <script type="text/html" id="gameserver">
         <img data-src="mapnameseo" data-alt="mapname"/>
         <div>
