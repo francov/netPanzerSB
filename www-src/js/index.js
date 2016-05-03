@@ -1,4 +1,5 @@
-define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], function($) {
+// define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], function($) {
+define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4"], function($) {
 
     function getTop10MedalsFor(player) {
       var m = ""
@@ -168,7 +169,7 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
         });
     }
 
-    $(document).on("deviceready", function(event, ui) {
+    document.addEventListener("deviceready", function(event, ui) {
         $.mobile.defaultPageTransition = 'none';
         $.support.cors = true;
         $.mobile.allowCrossDomainPages = true;
@@ -190,8 +191,13 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
             }
         });
 
-        $( document ).bind( "pagebeforechange", function( event, data ) {
-          if (data.toPage[0].id == "home") $('#serverList').listview('refresh');
+        $(document).bind("pagebeforechange", function( event, data ) {
+          if (data.toPage[0].id == "home") 
+            if ($('#serverList').hasClass('ui-listview')) {
+                $('#serverList').listview('refresh');
+            } else {
+                $('#serverList').trigger('create');
+            }
           if (data.toPage[0].id == "hallOfFame") {
             if (!hallOfFameLoaded) loadHallOfFame();
           }
@@ -205,6 +211,6 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4","../cordova"], fun
                 loadInfo();
             }
         }, 30000);
-    });
-    if (document.URL.match(/^http?:/)) $(document).trigger("deviceready");
+    }, false);
+
 });

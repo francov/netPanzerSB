@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             },
             {
                 name: '../index',
-                exclude: ['../main', '../../cordova']
+                exclude: ['../main']
             }
           ]
         }
