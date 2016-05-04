@@ -22,10 +22,10 @@
         <icon density="mdpi" src="res/icon/android/icon-48-mdpi.png" />
         <icon density="hdpi" src="res/icon/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
-        <preference name="FadeSplashScreenDuration" value="1000"/>
+        <preference name="FadeSplashScreenDuration" value="1000" />
         <preference name="SplashScreenDelay" value="5000" />
         <preference name="SplashScreenBackgroundColor" value="black" />
-        <preference name="ShowSplashScreenSpinner" value="false"/>
+        <preference name="ShowSplashScreenSpinner" value="false" />
         <preference name="SplashShowOnlyFirstTime" value="false" />
         <splash density="hdpi" src="res/screen/android/splash-hdpi.9.png" />
         <splash density="ldpi" src="res/screen/android/splash-ldpi.9.png" />
@@ -34,9 +34,10 @@
     </platform>
     <platform name="browser">
         <preference name="SplashScreen" value="/res/screen/android/splash-xhdpi.9.png" />
-        <preference name="SplashScreenDelay" value="3000" />
-        <preference name="SplashScreenBackgroundColor" value="green" />
-        <preference name="ShowSplashScreen" value="false" />
+        <preference name="FadeSplashScreenDuration" value="1000" />
+        <preference name="SplashScreenDelay" value="5000" />
+        <preference name="SplashScreenBackgroundColor" value="black" />
+        <preference name="ShowSplashScreen" value="true" />
         <preference name="SplashScreenWidth" value="600" />
         <preference name="SplashScreenHeight" value="300" />
     </platform>

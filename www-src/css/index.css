@@ -249,3 +249,23 @@ h1 {
   padding: 0px;
   border-radius: 3px;
 }
+
+.ui-bar-a {
+  border: 1px solid #352222 !important;
+  background-image: linear-gradient( #CC0F0F , #B10404 ) !important;
+}
+
+.ui-btn-active {
+    border: 1px solid #B10303 !important;
+    background: #EF2828 !important;
+    text-shadow: 0 1px 0 #B10303 !important;
+    background-image: linear-gradient( #B10303 , #2D0303 ) !important;
+}
+
+.ui-focus, .ui-btn:focus {
+  box-shadow: none !important; /*inset 0 0 3px #B10303, 0 0 9px #B10303 !important;*/
+}
+
+.ui-navbar ul {
+  margin: -3px !important;
+}
