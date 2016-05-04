@@ -170,6 +170,9 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4"], function($) {
     }
 
     document.addEventListener("deviceready", function(event, ui) {
+        if (cordova.platformId == 'android') {
+          StatusBar.backgroundColorByHexString("#A70C0C");
+        }
         $.mobile.defaultPageTransition = 'none';
         $.support.cors = true;
         $.mobile.allowCrossDomainPages = true;
