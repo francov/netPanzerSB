@@ -182,14 +182,14 @@ define(["jquery", "jquerymobile", "jquery.loadTemplate-1.2.4"], function($) {
             if (!$.mobile.activePage.is("#home")) {
                 $.mobile.changePage('#home', {transition: 'none'});
             } else {
-                navigator.notification.confirm('Really quit NetPanzerSB?',
+                navigator.notification.confirm('Do you really want to quit?',
                     function(button) {
                         if (button == 2) {
                             navigator.app.exitApp();
                         }
                     },
-                    'Quit',
-                    'Cancel,Exit'
+                    'NetPanzerSB',
+                    'Cancel,Quit'
                 );
             }
         });
