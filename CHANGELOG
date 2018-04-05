@@ -1,17 +1,27 @@
+2018-04-05 NetPanzerSB - 1.1.3
+
+    - Change splash screen
+    - Add reference to Telegram Channel in About section
+    - Update cordova project
+
+
 2016-05-24 NetPanzerSB - 1.1.2
 
     - Fix typo in hall of fame section
+
 
 2016-05-20 NetPanzerSB - 1.1.1
 
     - Add missing map
     - FIX: statusbar color
 
+
 2016-04-15 NetPanzerSB - 1.1.0
 
     - Add statusbar color
     - Cordova update
     - License updates
+
 
 2014-08-28 NetPanzerSB - 1.0.2
 
